@@ -32,3 +32,4 @@ Route::get('/login', function () {
 
 Route::get('/riasec-test', [RiasecTestController::class, 'index'])->name('riasec.test');
 Route::get('/riasec-result', [RiasecTestController::class, 'showResult'])->name('riasec.result');
+

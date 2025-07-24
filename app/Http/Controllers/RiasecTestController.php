@@ -280,7 +280,6 @@ class RiasecTestController extends Controller
         $question = null;
 
         if (is_null($level_param) || is_null($question_order_in_level_param)) {
-            // Logika untuk menemukan pertanyaan pertama yang belum dijawab di level yang diharapkan
             $answeredQuestionIds = UserAnswer::where('user_id', $user->id)->pluck('question_id')->toArray();
 
             $question = Question::where('level', $currentLevelExpected)
@@ -308,9 +307,6 @@ class RiasecTestController extends Controller
             }
 
         } else {
-            // Ini adalah pemanggilan spesifik dengan level dan order_in_level (dari tombol Prev/Next)
-            // HITUNG question_order GLOBAL dari level dan order_in_level yang diminta
-            // $globalQuestionOrderToFind = ($level_param - 1) * $questionsPerLevel + $question_order_in_level_param;
 
             $question = Question::where('level', $level_param)
                                 ->where('question_order', $question_order_in_level_param) 
@@ -320,41 +316,37 @@ class RiasecTestController extends Controller
                 return response()->json(['message' => 'Pertanyaan tidak ditemukan untuk level dan order ini.', 'test_completed' => false], 404);
             }
 
-            // Validasi: Pastikan user tidak melompati level
             if ($level_param > $currentLevelExpected) {
                 return response()->json(['error' => 'Anda harus menyelesaikan Level ' . ($currentLevelExpected) . ' terlebih dahulu.'], 403);
             }
         }
 
-        // Ambil jawaban pengguna untuk pertanyaan ini (jika sudah ada)
         $userAnswer = UserAnswer::where('user_id', $user->id)
                                 ->where('question_id', $question->id)
                                 ->first();
 
-        // Hitung question_order_in_level dari question_order global yang ditemukan
         $currentQuestionGlobalOrderCalculated = ($question->level - 1) * $questionsPerLevel + $question->question_order;
 
         return response()->json([
             'question' => $question,
             'user_answer_choice' => $userAnswer ? $userAnswer->answer_choice : null,
-            'current_question_order' => $currentQuestionGlobalOrderCalculated, // Ini adalah order GLOBAL
-            'current_question_order_in_level' => $question->question_order, // Order dalam level (dihitung)
+            'current_question_order' => $currentQuestionGlobalOrderCalculated, 
+            'current_question_order_in_level' => $question->question_order,
             'answered_count' => $answeredQuestionsCountGlobal,
             'total_questions' => $totalQuestionsGlobal,
             'test_completed' => false,
-            'current_level' => $question->level, // Level pertanyaan yang dikirim
+            'current_level' => $question->level, 
             'questions_per_level' => $questionsPerLevel,
         ], 200);
     }
 
-    // submitAnswer tetap sama. Tidak perlu perubahan karena dia sudah menerima question_order global.
     public function submitAnswer(Request $request)
     {
         $user = Auth::user();
         $validatedData = $request->validate([
             'question_id' => 'required|exists:questions,id',
             'level' => 'required|integer',
-            'question_order' => 'required|integer', // Ini adalah order GLOBAL dari frontend
+            'question_order' => 'required|integer',
             'answer_choice' => 'required|string|in:R,I,A,S,E,C',
         ]);
 
@@ -383,7 +375,7 @@ class RiasecTestController extends Controller
 
             DB::commit();
 
-            $answeredQuestionsCount = UserAnswer::where('user_id', $user->id)->count();
+            $answeredQuestionsCount = UserAnswer::where('user_id', $user->id)->distinct('question_id')->count();
             $totalQuestions = Question::count();
             $questionsPerLevel = 12;
 
@@ -491,13 +483,25 @@ class RiasecTestController extends Controller
 
     public function showResult()
     {
+        return view('riasec.result');
+    }
+
+    public function getUserResultJson()
+    {
         $user = Auth::user();
+        if (!$user) {
+            \Log::error("getUserResultJson: Unauthorized access - User not authenticated.");
+            return response()->json(['error' => 'Unauthorized: User not authenticated.'], 401);
+        }
+
         $userResult = UserResult::where('user_id', $user->id)->first();
 
         if (!$userResult) {
-            return redirect()->route('riasec.test')->with('error', 'Anda belum menyelesaikan tes RIASEC.');
+            \Log::warning("getUserResultJson: Hasil tes tidak ditemukan untuk User ID: {$user->id}.");
+            return response()->json(['message' => 'Hasil tes belum tersedia atau Anda belum menyelesaikan tes.'], 404);
         }
 
-        return view('riasec.result', compact('userResult'));
+        \Log::info("getUserResultJson: Mengirim hasil tes untuk User ID: {$user->id}.");
+        return response()->json(compact('userResult'), 200);
     }
 }

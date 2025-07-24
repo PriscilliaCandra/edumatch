@@ -10,11 +10,10 @@
             </div>
 
             <div id="progress-bar" class="mb-4">
-                {{-- Progress bar akan di-render di sini oleh JavaScript --}}
+                
             </div>
 
             <div id="question-area" class="text-center">
-                {{-- Konten pertanyaan akan di-render di sini oleh JavaScript --}}
                 <div class="d-flex justify-content-center align-items-center" style="min-height: 150px;">
                     <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -40,7 +39,7 @@
 
 @push('scripts')
 <script>
-// Variabel global untuk status tes dan cache jawaban
+
 let currentLevel = 1;
 let currentQuestionOrderInLevel = 1;
 let questionsPerLevel = 12;
@@ -51,7 +50,6 @@ let currentQuestionServerLevel = null;
 let currentQuestionGlobalOrder = null;
 let currentQuestionData = null;
 
-// >>>>>>> PERBAIKAN DI SINI: Deklarasikan variabel-variabel DOM dengan 'let' <<<<<<<
 let questionArea;
 let progressBarContainer;
 let prevBtn;
@@ -74,11 +72,7 @@ function showAlert(message, type) {
     console.log('DEBUG: Alert ditampilkan:', message, type);
 }
 
-/**
- * Memperbarui progress bar dan informasi level/pertanyaan.
- * @param {number} answeredCount // Parameter fungsi adalah 'answeredCount'
- */
-function updateProgressBar(answeredCount) { // Perbaikan: Gunakan 'answeredCount' sebagai parameter
+function updateProgressBar(answeredCount) { 
     console.log('DEBUG: updateProgressBar dipanggil. answeredCount:', answeredCount);
     console.log('DEBUG: userAnswersCache:', userAnswersCache);
     console.log('DEBUG: currentLevel:', currentLevel, 'questionsPerLevel:', questionsPerLevel);
@@ -116,11 +110,6 @@ function updateProgressBar(answeredCount) { // Perbaikan: Gunakan 'answeredCount
     levelInfoSpan.textContent = `Anda sedang di Level ${currentLevel}`;
 }
 
-/**
- * Memuat pertanyaan dari API berdasarkan level dan ordernya dalam level.
- * @param {number} [levelToLoad=null] Level pertanyaan yang diminta.
- * @param {number} [orderToLoadInLevel=null] Urutan pertanyaan dalam level yang diminta.
- */
 async function loadQuestion(levelToLoad = null, orderToLoadInLevel = null) { // <--- PERBAIKAN: Tambah orderToLoadInLevel sebagai parameter kedua
     console.log('DEBUG: loadQuestion dipanggil. Level:', levelToLoad, 'OrderInLevel:', orderToLoadInLevel);
     if (!questionArea) {
@@ -148,11 +137,11 @@ async function loadQuestion(levelToLoad = null, orderToLoadInLevel = null) { // 
 
     try {
         let fetchUrl;
-        // Gunakan levelToLoad dan orderToLoadInLevel untuk membangun URL jika keduanya ada
+
         if (levelToLoad && orderToLoadInLevel) {
             fetchUrl = `/api/riasec-get-question/${levelToLoad}/${orderToLoadInLevel}`;
         } else {
-            fetchUrl = `/api/riasec-get-question`; // Biarkan backend menentukan pertanyaan awal (next relevan)
+            fetchUrl = `/api/riasec-get-question`;
         }
         console.log('DEBUG: Melakukan fetch ke:', fetchUrl);
 
