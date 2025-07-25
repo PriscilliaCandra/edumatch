@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\RiasecTestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,6 @@ Route::middleware([JwtMiddleware::class])->group(function () {
     Route::get('riasec-get-question/{level_param?}/{question_order_in_level_param?}', [RiasecTestController::class, 'getQuestionByLevelAndOrderJson']);
     Route::post('riasec-submit-answer', [RiasecTestController::class, 'submitAnswer']);
     Route::get('riasec-get-user-result', [RiasecTestController::class, 'getUserResultJson'])->name('api.riasec.get_user_result');
+    Route::post('chatbot/ask', [ChatBotController::class, 'ask']); 
+    Route::get('chatbot/history', [ChatBotController::class, 'history']);
 });
