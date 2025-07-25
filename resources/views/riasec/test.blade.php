@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-4" style="max-width: 800px;">
     <div class="card shadow-lg">
         <div class="card-body p-4">
             <div class="text-center mb-4">
-                <h3 class="fw-bold text-primary mb-2">Tes Minat & Bakat RIASEC</h3>
+                <h3 class="fw-bold text-primary mb-2">EduGuide</h3>
                 <p class="text-muted" id="level-info">Anda sedang di Level 1</p>
             </div>
 
@@ -26,15 +26,16 @@
 
             <div class="d-flex justify-content-between mt-4">
                 <button id="prev-btn" class="btn btn-secondary" disabled>
-                    <i class="fas fa-arrow-left me-2"></i>Sebelumnya
+                    Sebelumnya
                 </button>
                 <button id="next-btn" class="btn btn-primary">
-                    Selanjutnya<i class="fas fa-arrow-right ms-2"></i>
+                    Selanjutnya
                 </button>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @push('scripts')
@@ -102,7 +103,6 @@ function updateProgressBar(answeredCount) {
             <div class="progress" style="height: 20px;">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: ${percentOverall}%;" aria-valuenow="${answeredCount}" aria-valuemin="0" aria-valuemax="${totalQuestionsGlobal}">${percentOverall}%</div>
             </div>
-            <p class="text-center text-muted mt-1">Anda telah menjawab ${answeredCount} dari ${totalQuestionsGlobal} pertanyaan.</p>
         </div>
 
         
@@ -110,7 +110,7 @@ function updateProgressBar(answeredCount) {
     levelInfoSpan.textContent = `Anda sedang di Level ${currentLevel}`;
 }
 
-async function loadQuestion(levelToLoad = null, orderToLoadInLevel = null) { // <--- PERBAIKAN: Tambah orderToLoadInLevel sebagai parameter kedua
+async function loadQuestion(levelToLoad = null, orderToLoadInLevel = null) { 
     console.log('DEBUG: loadQuestion dipanggil. Level:', levelToLoad, 'OrderInLevel:', orderToLoadInLevel);
     if (!questionArea) {
         console.error('DEBUG: questionArea belum diinisialisasi!');
@@ -208,9 +208,9 @@ async function loadQuestion(levelToLoad = null, orderToLoadInLevel = null) { // 
         }
 
         questionArea.innerHTML = `
-            <h5 class="mb-3 text-secondary">Pertanyaan ${currentQuestionOrderInLevel} dari ${questionsPerLevel} (Level ${currentLevel})</h5>
-            <h4 class="mb-4 fw-bold text-dark">${currentQuestionData.question_text}</h4>
-            <div class="d-grid gap-3" id="options-container">
+            <h6 class="mb-3 text-secondary">Pertanyaan ${currentQuestionOrderInLevel} dari ${questionsPerLevel} (Level ${currentLevel})</h6>
+            <h5 class="mb-4 fw-bold text-dark">${currentQuestionData.question_text}</h5>
+            <div class="d-grid gap-2" id="options-container">
                 <button type="button" class="btn btn-outline-primary btn-lg py-3 option-btn" data-choice="R">${currentQuestionData.option_r}</button>
                 <button type="button" class="btn btn-outline-primary btn-lg py-3 option-btn" data-choice="I">${currentQuestionData.option_i}</button>
                 <button type="button" class="btn btn-outline-primary btn-lg py-3 option-btn" data-choice="A">${currentQuestionData.option_a}</button>
@@ -300,7 +300,7 @@ async function saveAnswerToBackend(selectedChoice) {
             body: JSON.stringify({
                 question_id: currentQuestionId,
                 level: currentQuestionServerLevel,
-                question_order: currentQuestionGlobalOrder, // Kirim order GLOBAL
+                question_order: currentQuestionGlobalOrder,
                 answer_choice: selectedChoice
             })
         });

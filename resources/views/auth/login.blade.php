@@ -3,10 +3,10 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
-        <div class="text-center mb-5">
+        <div class="text-center mb-3">
             <div class="bounce-in">
                 <i class="fas fa-graduation-cap" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
-                <h1 class="text-white fw-bold mb-2">Selamat Datang!</h1>
+                <h2 class="text-white fw-bold mb-2">Selamat Datang!</h2>
                 <p class="text-white-50">Mari mulai perjalanan penemuan minat dan bakat Anda</p>
             </div>
         </div>

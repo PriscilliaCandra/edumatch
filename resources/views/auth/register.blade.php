@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
-        <div class="text-center mb-5">
+        <div class="text-center mb-3">
             <div class="bounce-in">
                 <i class="fas fa-user-plus" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
-                <h1 class="text-white fw-bold mb-2">Bergabunglah!</h1>
+                <h2 class="text-white fw-bold mb-2">Bergabunglah!</h2>
                 <p class="text-white-50">Mulai perjalanan penemuan diri Anda hari ini</p>
             </div>
         </div>
@@ -105,6 +105,103 @@
                         </p>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="text-center mb-2">
+            <div class="bounce-in">
+                <i class="fas fa-user-plus" style="font-size: 2.5rem; color: white; margin-bottom: 0.5rem;"></i>
+                <h3 class="text-white fw-bold mb-1">Bergabunglah!</h3>
+                <p class="text-white-50 small">Mulai perjalanan penemuan diri Anda hari ini</p>
+            </div>
+        </div>
+
+        <div class="card slide-in-left">
+            <div class="card-body p-4">
+                <div class="text-center mb-3">
+                    <h4 class="fw-bold text-primary mb-1">Daftar</h4>
+                </div>
+
+                <div id="alert-container" class="mb-3"></div>
+
+                <form id="registerForm">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold small">Nama</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-user text-muted"></i>
+                            </span>
+                            <input type="text" name="name" id="name" class="form-control border-start-0 py-2"
+                                value="{{ old('name') }}" placeholder="Nama lengkap" required>
+                        </div>
+                        <div class="invalid-feedback" id="name-error"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold small">Email</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-envelope text-muted"></i>
+                            </span>
+                            <input type="email" name="email" id="email" class="form-control border-start-0 py-2"
+                                value="{{ old('email') }}" placeholder="Email aktif" required>
+                        </div>
+                        <div class="invalid-feedback" id="email-error"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-semibold small">Password</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-lock text-muted"></i>
+                            </span>
+                            <input type="password" name="password" id="password" class="form-control border-start-0 py-2"
+                                placeholder="Minimal 8 karakter" required>
+                            <button type="button" class="btn btn-outline-secondary border-start-0 btn-sm" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="password-error"></div>
+                        <div class="password-strength mt-2" id="passwordStrength"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label fw-semibold small">Ulangi Password</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-check-circle text-muted"></i>
+                            </span>
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control border-start-0 py-2" placeholder="Konfirmasi password" required>
+                            <button type="button" class="btn btn-outline-secondary border-start-0 btn-sm" id="toggleConfirmPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="password_confirmation-error"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100 py-2 btn-sm" id="registerBtn">
+                            <span class="spinner-border spinner-border-sm d-none" id="registerSpinner" role="status"></span>
+                            <i class="fas fa-rocket me-1"></i>
+                            <span id="registerText">Daftar</span>
+                        </button>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="text-muted small mb-0">
+                            Sudah punya akun?
+                            <a href="{{ route('login') }}" class="text-primary fw-bold text-decoration-none">Login Sekarang</a>
+                        </p>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

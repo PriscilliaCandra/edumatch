@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
+<div class="container py-3" style="height: 100vh; overflow: hidden;">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card shadow-lg border-0 rounded-lg" style="max-height: 90vh; overflow-y: auto;">
                 <div class="card-header bg-primary text-white text-center py-4">
                     <h2 class="mb-0 fw-bold">Hasil Tes Minat & Bakat RIASEC Anda</h2>
                     <p class="mb-0" id="userNameDisplay">Memuat nama...</p>
@@ -78,6 +78,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @push('scripts')
