@@ -25,7 +25,7 @@
   - Menjawab pertanyaan seputar kuliah & karier berdasarkan profil RIASEC.
   - Menyimpan riwayat percakapan untuk referensi pengguna.
 
-- **🖥UI Responsif**
+- **UI Responsif**
   - Desain modern, ramah pengguna, dan mendukung perangkat seluler.
   - Transisi halaman yang mulus dan interaktif.
 
