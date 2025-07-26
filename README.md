@@ -55,14 +55,13 @@
 
 ---
 
-## 🖥Persyaratan Sistem
+## Persyaratan Sistem
 
 - PHP >= 8.1
 - Composer
 - Node.js & NPM
 - MySQL
 - Ollama (dengan model `zephyr:7b-beta`)
-- Browser modern (Chrome/Firefox/Edge)
 
 ---
 
