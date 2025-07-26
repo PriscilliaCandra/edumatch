@@ -49,12 +49,10 @@ class ChatBotController extends Controller
             ]);
         }
 
-        // Dapatkan tipe kepribadian dominan berdasarkan skor RIASEC
         $personalityTypesWithScores = $this->getDominantPersonalityTypesWithScores($userResult);
         $personalityContext = $this->formatPersonalityTypesForPrompt($personalityTypesWithScores);
         $personalityCharacteristics = $this->getPersonalityCharacteristics($personalityTypesWithScores);
         
-        // Siapkan prompt untuk model Zephyr dari Ollama
         $prompt = "Anda adalah asisten chatbot yang membantu memberikan informasi dan saran tentang jurusan perkuliahan dan karir berdasarkan tes minat bakat RIASEC.
                   User memiliki tipe kepribadian dominan: {$personalityContext}.
                   
@@ -81,7 +79,6 @@ class ChatBotController extends Controller
                   3. Memberikan contoh konkret atau tips praktis terkait perkuliahan/karir.
                   4. Menjaga format ringkas dan informatif.";
 
-        // Panggilan ke Ollama (Server Lokal)
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'http://localhost:11434/api/generate'); 

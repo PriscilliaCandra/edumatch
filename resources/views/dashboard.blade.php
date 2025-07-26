@@ -48,7 +48,7 @@
                     ['icon' => 'brain', 'color' => 'primary', 'title' => 'Tes Minat Bakat', 'desc' => 'Mulai tes untuk mengetahui minat dan bakat Anda dengan analisis mendalam', 'action' => 'startTest()', 'btnClass' => 'btn-primary', 'btnText' => 'Mulai Tes', 'btnIcon' => 'play', 'delay' => '0.1s'],
                     ['icon' => 'history', 'color' => 'success', 'title' => 'Riwayat Tes', 'desc' => 'Lihat hasil rekomendasi jurusan bedasarkan hasil test minat dan bakat Anda', 'action' => 'goToResult()', 'btnClass' => 'btn-success', 'btnText' => 'Lihat Riwayat', 'btnIcon' => 'chart-line', 'delay' => '0.2s'],
                     ['icon' => 'robot', 'color' => 'warning', 'title' => 'Fitur Chatbot', 'desc' => 'Gunakan chatbot untuk tanya jawab dan bantuan interakti.', 'action' => 'goToChatbot()', 'btnClass' => 'btn-warning', 'btnText' => 'Buka Chatbot', 'btnIcon' => 'comments', 'delay' => '0.3s'],
-                    ['icon' => 'cog', 'color' => 'danger', 'title' => 'Pengaturan', 'desc' => 'Atur profil dan preferensi akun Anda sesuai kebutuhan', 'action' => 'openSettings()', 'btnClass' => 'btn-danger', 'btnText' => 'Pengaturan', 'btnIcon' => 'sliders-h', 'delay' => '0.4s'],
+                    ['icon' => 'info-circle', 'color' => 'danger', 'title' => 'Tentang Kami', 'desc' => 'Pelajari lebih lanjut tentang EduMatch dan tim pengembang.', 'action' => 'goToAbout()', 'btnClass' => 'btn-danger', 'btnText' => 'Tentang Kami', 'btnIcon' => 'info-circle', 'delay' => '0.4s'],
                 ];
             @endphp
 
@@ -136,16 +136,14 @@
         }, 800);
     }
 
-    function openSettings() {
+    function goToAbout() {
         const btn = event.target;
         const originalText = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memuat...';
         btn.disabled = true;
 
         setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            alert('Fitur pengaturan akan segera tersedia!');
-        }, 2000);
+            window.location.href = '{{ route('about') }}';
+        }, 800);
     }
 </script>

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container py-4">
-    {{-- Tombol Dashboard di luar card, terlihat natural dan sejajar --}}
     <div class="mb-3">
         <a href="{{ route('dashboard') }}" class="btn btn-outline-primary btn-light rounded-pill d-inline-flex align-items-center shadow-sm px-3 py-2">
             <i class="fas fa-arrow-left me-2"></i> Dashboard
@@ -46,31 +45,28 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi elemen DOM
     const chatMessagesContainer = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-message-input');
     const sendMessageBtn = document.getElementById('send-message-btn');
     const chatLoading = document.getElementById('chat-loading');
     const chatError = document.getElementById('chat-error');
 
-    // Dapatkan token JWT dari localStorage
     function getJwtToken() {
         return localStorage.getItem('jwt_token');
     }
 
-    // Fungsi untuk menampilkan pesan ke UI chat
     function displayMessage(sender, message) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('d-flex', 'mb-2'); // Gunakan flexbox untuk alignment
+        messageElement.classList.add('d-flex', 'mb-2'); 
         
         const messageBubble = document.createElement('div');
-        messageBubble.classList.add('p-3', 'rounded-xl', 'shadow-sm', 'flex-shrink-0'); // flex-shrink-0 agar tidak mengecil
+        messageBubble.classList.add('p-3', 'rounded-xl', 'shadow-sm', 'flex-shrink-0'); 
 
         if (sender === 'user') {
-            messageBubble.classList.add('bg-primary', 'text-white', 'ms-auto'); // ms-auto untuk dorong ke kanan
+            messageBubble.classList.add('bg-primary', 'text-white', 'ms-auto');
             messageBubble.style.wordWrap = 'break-word';
-        } else { // bot
-            messageBubble.classList.add('bg-light', 'text-dark', 'me-auto'); // me-auto untuk dorong ke kiri
+        } else { 
+            messageBubble.classList.add('bg-light', 'text-dark', 'me-auto'); 
             messageBubble.style.wordWrap = 'break-word';
         }
         messageBubble.style.maxWidth = '80%';
@@ -78,15 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         messageElement.appendChild(messageBubble);
         chatMessagesContainer.appendChild(messageElement);
-        
-        // Scroll ke bawah dengan smooth animation
+
         chatMessagesContainer.scrollTo({
             top: chatMessagesContainer.scrollHeight,
             behavior: 'smooth'
         });
     }
 
-    // Fungsi untuk memuat riwayat chat
     async function loadChatHistory() {
         const token = getJwtToken();
         if (!token) {
@@ -108,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (response.ok) {
-                chatMessagesContainer.innerHTML = ''; // Bersihkan pesan default
+                chatMessagesContainer.innerHTML = ''; 
                 if (data.length === 0) {
                      displayMessage('bot', 'Halo! Saya asisten Anda. Tanyakan apa saja tentang perkuliahan atau karir.');
                 } else {
@@ -127,17 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Fungsi untuk mengirim pesan ke chatbot
     async function sendMessage() {
         const message = userInput.value.trim();
         if (message === '') return;
 
         displayMessage('user', message);
-        userInput.value = ''; // Bersihkan input
+        userInput.value = '';
 
-        chatLoading.style.display = 'block'; // Tampilkan loading
-        chatError.style.display = 'none'; // Sembunyikan error sebelumnya
-        sendMessageBtn.disabled = true; // Nonaktifkan tombol kirim
+        chatLoading.style.display = 'block'; 
+        chatError.style.display = 'none';
+        sendMessageBtn.disabled = true; 
 
         const token = getJwtToken();
         if (!token) {
@@ -165,7 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 displayMessage('bot', data.reply);
                 if (data.needs_personality_test) {
-                    // Berikan tombol untuk tes jika user belum melakukan tes RIASEC
                     const testButtonContainer = document.createElement('div');
                     testButtonContainer.classList.add('text-center', 'mt-3');
                     testButtonContainer.innerHTML = `<a href="{{ route('riasec.test') }}" class="btn btn-info">Mulai Tes RIASEC</a>`;
@@ -184,13 +176,12 @@ document.addEventListener('DOMContentLoaded', function() {
             chatError.textContent = 'Terjadi kesalahan jaringan atau server saat mengirim pesan.';
             chatError.style.display = 'block';
         } finally {
-            chatLoading.style.display = 'none'; // Sembunyikan loading
-            sendMessageBtn.disabled = false; // Aktifkan kembali tombol kirim
-            userInput.focus(); // Fokuskan kembali input
+            chatLoading.style.display = 'none'; 
+            sendMessageBtn.disabled = false; 
+            userInput.focus(); 
         }
     }
 
-    // Event listeners
     sendMessageBtn.addEventListener('click', sendMessage);
     userInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
@@ -198,14 +189,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Periksa autentikasi saat memuat halaman
     const token = getJwtToken();
     if (!token) {
         chatError.textContent = 'Anda perlu login untuk menggunakan chatbot.';
         chatError.style.display = 'block';
         setTimeout(() => window.location.href = '{{ route('login') }}', 2000);
     } else {
-        loadChatHistory(); // Muat riwayat chat jika terautentikasi
+        loadChatHistory(); 
     }
 });
 </script>

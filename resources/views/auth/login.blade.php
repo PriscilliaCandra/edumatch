@@ -194,7 +194,6 @@
         alertContainer.appendChild(alertDiv);
     }
 
-    // Add confetti effect on successful login
     function createConfetti() {
         const colors = ['#667eea', '#764ba2', '#4facfe', '#43e97b', '#fa709a'];
         for (let i = 0; i < 50; i++) {
@@ -217,7 +216,6 @@
         }
     }
 
-    // Add fall animation for confetti
     const style = document.createElement('style');
     style.textContent = `
         @keyframes fall {

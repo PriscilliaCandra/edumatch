@@ -337,7 +337,6 @@ async function saveAnswerToBackend(selectedChoice) {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DEBUG: DOMContentLoaded fired.');
 
-    // Inisialisasi variabel elemen DOM
     questionArea = document.getElementById('question-area');
     progressBarContainer = document.getElementById('progress-bar');
     prevBtn = document.getElementById('prev-btn');
@@ -345,7 +344,6 @@ document.addEventListener('DOMContentLoaded', function() {
     alertMessageDiv = document.getElementById('alert-message');
     levelInfoSpan = document.getElementById('level-info');
 
-    // Tambahkan event listener ke tombol Prev dan Next
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
             console.log('DEBUG: Prev button clicked.');

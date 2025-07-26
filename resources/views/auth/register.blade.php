@@ -1,114 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-        <div class="text-center mb-3">
-            <div class="bounce-in">
-                <i class="fas fa-user-plus" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
-                <h2 class="text-white fw-bold mb-2">Bergabunglah!</h2>
-                <p class="text-white-50">Mulai perjalanan penemuan diri Anda hari ini</p>
-            </div>
-        </div>
-
-        <div class="card slide-in-left">
-            <div class="card-body p-5">
-                <div class="text-center mb-4">
-                    <h3 class="fw-bold text-primary mb-2">
-                        Daftar
-                    </h3>
-                    <p class="text-muted">Buat akun baru untuk memulai petualangan</p>
-                </div>
-
-                <div id="alert-container"></div>
-
-                <form id="registerForm">
-                    @csrf
-
-                    <div class="mb-4">
-                        <label for="name" class="form-label">
-                            <i class="fas fa-user me-2"></i>Nama Lengkap
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-end-0">
-                                <i class="fas fa-user text-muted"></i>
-                            </span>
-                            <input type="text" name="name" id="name" class="form-control border-start-0"
-                                   value="{{ old('name') }}" placeholder="Masukkan nama lengkap Anda" required>
-                        </div>
-                        <div class="invalid-feedback" id="name-error"></div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="email" class="form-label">
-                            <i class="fas fa-envelope me-2"></i>Email
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-end-0">
-                                <i class="fas fa-envelope text-muted"></i>
-                            </span>
-                            <input type="email" name="email" id="email" class="form-control border-start-0"
-                                   value="{{ old('email') }}" placeholder="Masukkan email aktif Anda" required>
-                        </div>
-                        <div class="invalid-feedback" id="email-error"></div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="password" class="form-label">
-                            <i class="fas fa-lock me-2"></i>Password
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-end-0">
-                                <i class="fas fa-lock text-muted"></i>
-                            </span>
-                            <input type="password" name="password" id="password" class="form-control border-start-0"
-                                   placeholder="Minimal 8 karakter" required>
-                            <button type="button" class="btn btn-outline-secondary border-start-0" id="togglePassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="invalid-feedback" id="password-error"></div>
-                        <div class="password-strength mt-2" id="passwordStrength"></div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="password_confirmation" class="form-label">
-                            <i class="fas fa-check-circle me-2"></i>Konfirmasi Password
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-end-0">
-                                <i class="fas fa-check-circle text-muted"></i>
-                            </span>
-                            <input type="password" name="password_confirmation" id="password_confirmation" 
-                                   class="form-control border-start-0" placeholder="Ulangi password Anda" required>
-                            <button type="button" class="btn btn-outline-secondary border-start-0" id="toggleConfirmPassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="invalid-feedback" id="password_confirmation-error"></div>
-                    </div>
-
-                    <div class="mb-4">
-                        <button type="submit" class="btn btn-primary w-100 py-3" id="registerBtn">
-                            <span class="spinner-border spinner-border-sm d-none" id="registerSpinner" role="status"></span>
-                            <i class="fas fa-rocket me-2"></i>
-                            <span id="registerText">Daftar</span>
-                        </button>
-                    </div>
-
-                    <div class="text-center">
-                        <p class="text-muted mb-0">
-                            Sudah punya akun? 
-                            <a href="{{ route('login') }}" class="text-primary fw-bold text-decoration-none">
-                                Login Sekarang
-                            </a>
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
@@ -279,7 +171,6 @@
                 }, 1500);
             } else {
                 if (data.errors) {
-                    // Handle validation errors
                     Object.keys(data.errors).forEach(field => {
                         const input = document.getElementById(field);
                         const errorDiv = document.getElementById(field + '-error');
@@ -300,13 +191,11 @@
             registerText.textContent = 'Mulai Petualangan';
         })
         .finally(() => {
-            // Reset loading state
             registerBtn.disabled = false;
             spinner.classList.add('d-none');
         });
     });
 
-    // Toggle password visibility
     document.getElementById('togglePassword').addEventListener('click', function() {
         const passwordInput = document.getElementById('password');
         const icon = this.querySelector('i');
@@ -322,7 +211,6 @@
         }
     });
 
-    // Toggle confirm password visibility
     document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
         const passwordInput = document.getElementById('password_confirmation');
         const icon = this.querySelector('i');
@@ -338,7 +226,6 @@
         }
     });
 
-    // Password strength indicator
     document.getElementById('password').addEventListener('input', function() {
         const password = this.value;
         const strengthDiv = document.getElementById('passwordStrength');
