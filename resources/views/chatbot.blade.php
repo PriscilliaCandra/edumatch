@@ -18,7 +18,7 @@
                 <div class="card-body p-3 d-flex flex-column flex-grow-1">
                     <div id="chat-messages" class="flex-grow-1 overflow-auto mb-3 pe-1" style="max-height: calc(80vh - 200px); scroll-behavior: smooth;">
                         <div class="text-center text-muted py-4">
-                            <i class="fas fa-robot me-1"></i> Selamat datang di EduBot! Tanyakan apa saja tentang perkuliahan atau karir.
+                            <i class="fas fa-robot me-1"></i> Selamat datang di EduBot! AI Agent yang siap membantumu seputar dunia perkuliahan 24/7.
                         </div>
                     </div>
 
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 chatMessagesContainer.innerHTML = ''; 
                 if (data.length === 0) {
-                     displayMessage('bot', 'Halo! Saya asisten Anda. Tanyakan apa saja tentang perkuliahan atau karir.');
+                     displayMessage('bot', 'Selamat datang di EduBot! AI Agent yang siap membantumu seputar dunia perkuliahan 24/7.');
                 } else {
                     data.forEach(chat => {
                         displayMessage(chat.sender, chat.message);

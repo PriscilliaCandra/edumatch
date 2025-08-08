@@ -58,7 +58,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="card bg-light h-100">
                                     <div class="card-body">
-                                        <h5 class="card-title text-secondary">Rekomendasi Jurusan</h5>
+                                        <h5 class="card-title text-secondary">Rekomendasi Jurusan & Kampus</h5>
                                         <p class="card-text" id="recommendedMajors"></p>
                                         <small class="text-muted">Rekomendasi ini adalah panduan. Jelajahi lebih lanjut bidang-bidang yang Anda minati!</small>
                                     </div>
