@@ -47,7 +47,7 @@
                 $features = [
                     ['icon' => 'brain', 'color' => 'primary', 'title' => 'Tes Minat Bakat', 'desc' => 'Mulai tes untuk mengetahui minat dan bakat Anda dengan analisis mendalam', 'action' => 'startTest()', 'btnClass' => 'btn-primary', 'btnText' => 'Mulai Tes', 'btnIcon' => 'play', 'delay' => '0.1s'],
                     ['icon' => 'history', 'color' => 'success', 'title' => 'Riwayat Tes', 'desc' => 'Lihat hasil rekomendasi jurusan bedasarkan hasil test minat dan bakat Anda', 'action' => 'goToResult()', 'btnClass' => 'btn-success', 'btnText' => 'Lihat Riwayat', 'btnIcon' => 'chart-line', 'delay' => '0.2s'],
-                    ['icon' => 'robot', 'color' => 'warning', 'title' => 'EduBot', 'desc' => 'AI Agent yang siap membantumu seputar dunia perkuliahan 24/7', 'action' => 'goToChatbot()', 'btnClass' => 'btn-warning', 'btnText' => 'Buka EduBot', 'btnIcon' => 'comments', 'delay' => '0.3s'],
+                    ['icon' => 'robot', 'color' => 'warning', 'title' => 'EduBot', 'desc' => 'Chatbot yang siap membantumu seputar dunia perkuliahan 24/7', 'action' => 'goToChatbot()', 'btnClass' => 'btn-warning', 'btnText' => 'Buka EduBot', 'btnIcon' => 'comments', 'delay' => '0.3s'],
                     ['icon' => 'info-circle', 'color' => 'danger', 'title' => 'Tentang Kami', 'desc' => 'Pelajari lebih lanjut tentang EduMatch dan tim pengembang.', 'action' => 'goToAbout()', 'btnClass' => 'btn-danger', 'btnText' => 'Tentang Kami', 'btnIcon' => 'info-circle', 'delay' => '0.4s'],
                 ];
             @endphp
